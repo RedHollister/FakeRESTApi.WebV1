@@ -1,0 +1,2462 @@
+{
+	"info": {
+		"_postman_id": "649774af-a37b-4e7e-a65a-a7236c86ea27",
+		"name": "FakeRESTApi.Web V1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38319514"
+	},
+	"item": [
+		{
+			"name": "Activities",
+			"item": [
+				{
+					"name": "ALL",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validar se retorna código de status 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    //Valida se dentro da requisição que fizemos é retornado Status code 200\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar se retorna array de objetos\", function () {\r",
+									"    pm.expect(pm.response.json()).to.be.an('array')\r",
+									"    //Valida se a resposta do Swagger/Servidor API está em formato JSON e de tipo array\r",
+									"});\r",
+									"\r",
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+									"  \"type\": \"array\",\r",
+									"  \"items\": [\r",
+									"    {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"id\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"title\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"dueDate\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"completed\": {\r",
+									"          \"type\": \"boolean\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"id\",\r",
+									"        \"title\",\r",
+									"        \"dueDate\",\r",
+									"        \"completed\"\r",
+									"      ]\r",
+									"    }\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"pm.test('O contrato é válido', function () {\r",
+									"    /**\r",
+									"     * tv4 -> lib/biblioteca de validar schema\r",
+									"     * validate -> valide\r",
+									"     * (data, schema) -> response, schema (o response está sendo retornado conforme contrato/schema?)\r",
+									"     * to.be -> será\r",
+									"     * true -> verdadeiro\r",
+									"     */\r",
+									"    pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"pm.test('Captura de ID', function(){\r",
+									"    var id = pm.response.json()\r",
+									"    console.log(id[0].id)\r",
+									"\r",
+									"    pm.globals.set(\"activiesId\",id[5].id);  //Vai setar no Environment uma variável de nome activiesId de valor igual a  id[0].id\r",
+									"})\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/v1/Activities",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Activities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validar se retorna código de status 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    //Valida se dentro da requisição que fizemos é retornado Status code 200\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar se retorna um objeto\", function () {\r",
+									"    pm.expect(pm.response.json()).to.be.an('object')\r",
+									"    //Valida se a resposta do Swagger/Servidor API está em formato JSON e de tipo array\r",
+									"});\r",
+									"\r",
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"items\": [\r",
+									"    {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"id\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"title\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"dueDate\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"completed\": {\r",
+									"          \"type\": \"boolean\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"id\",\r",
+									"        \"title\",\r",
+									"        \"dueDate\",\r",
+									"        \"completed\"\r",
+									"      ]\r",
+									"    }\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"pm.test('O contrato é válido', function () {\r",
+									"    /**\r",
+									"     * tv4 -> lib/biblioteca de validar schema\r",
+									"     * validate -> valide\r",
+									"     * (data, schema) -> response, schema (o response está sendo retornado conforme contrato/schema?)\r",
+									"     * to.be -> será\r",
+									"     * true -> verdadeiro\r",
+									"     */\r",
+									"    console.log(pm.response.json())\r",
+									"    pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/v1/Activities/{{activiesId}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Activities",
+								"{{activiesId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar Atividade",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validar se retorna código de status 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    //Valida se dentro da requisição que fizemos é retornado Status code 200\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar se retorna um objeto\", function () {\r",
+									"    pm.expect(pm.response.json()).to.be.an('object')\r",
+									"    //Valida se a resposta do Swagger/Servidor API está em formato JSON e de tipo array\r",
+									"});\r",
+									"\r",
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"items\": [\r",
+									"    {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"id\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"title\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"dueDate\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"completed\": {\r",
+									"          \"type\": \"boolean\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"id\",\r",
+									"        \"title\",\r",
+									"        \"dueDate\",\r",
+									"        \"completed\"\r",
+									"      ]\r",
+									"    }\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"pm.test('O contrato é válido', function () {\r",
+									"    /**\r",
+									"     * tv4 -> lib/biblioteca de validar schema\r",
+									"     * validate -> valide\r",
+									"     * (data, schema) -> response, schema (o response está sendo retornado conforme contrato/schema?)\r",
+									"     * to.be -> será\r",
+									"     * true -> verdadeiro\r",
+									"     */\r",
+									"    console.log(pm.response.json())\r",
+									"    pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"pm.test('Validar o id da criação da atividade', function(){\r",
+									"    /**\r",
+									"    * postman -> pm\r",
+									"    * validar -> expect\r",
+									"    * que o meu id -> pm.response.json().id\r",
+									"    * posui -> to.be\r",
+									"    * id igual ao valor ... -> eql()\r",
+									"    */\r",
+									"    pm.expect(pm.response.json().id).to.be.eql(pm.iterationData.get(\"id\"))  // Realiza a comparação do parâmetro id que a resposta da requsição deu com o parâmetro id que está dentro de um arquivo .csv (pm.iterationData.get)\r",
+									"\r",
+									"    pm.globals.unset(\"activiesId\");    //Nulifica a variável global activiesId de modo que não confunda o usuário com outros testes\r",
+									"    pm.globals.set(\"activiesId\", pm.response.json().id);   //Coloca dentro da variável global activiesId o mesmo valor do parâmetro id da resposta em formato JSON dessa requisição atual\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": {{id}},\r\n  \"title\": \"{{title}}\",\r\n  \"dueDate\": \"2024-11-30T23:02:10.846Z\",\r\n  \"completed\": {{completed}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/v1/Activities",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Activities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Atividade",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validar se retorna código de status 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    //Valida se dentro da requisição que fizemos é retornado Status code 200\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar se retorna um objeto\", function () {\r",
+									"    pm.expect(pm.response.json()).to.be.an('object')\r",
+									"    //Valida se a resposta do Swagger/Servidor API está em formato JSON e de tipo array\r",
+									"});\r",
+									"\r",
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"items\": [\r",
+									"    {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"id\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"title\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"dueDate\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"completed\": {\r",
+									"          \"type\": \"boolean\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"id\",\r",
+									"        \"title\",\r",
+									"        \"dueDate\",\r",
+									"        \"completed\"\r",
+									"      ]\r",
+									"    }\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"pm.test('Validar se o contrato é válido', function () {\r",
+									"    /**\r",
+									"     * tv4 -> lib/biblioteca de validar schema\r",
+									"     * validate -> valide\r",
+									"     * (data, schema) -> response, schema (o response está sendo retornado conforme contrato/schema?)\r",
+									"     * to.be -> será\r",
+									"     * true -> verdadeiro\r",
+									"     */\r",
+									"    console.log(pm.response.json())\r",
+									"    pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"/**\r",
+									" * postman -> pm\r",
+									" * validar -> expect\r",
+									" * que o meu id -> pm.response.json().id\r",
+									" * posui -> to.be\r",
+									" * id igual ao valor ... -> eql()\r",
+									" */\r",
+									"\r",
+									"pm.test('Validar se a edição do parâmetro completed da atividade foi feita', function(){\r",
+									"    pm.expect(pm.response.json().completed).to.be.eql(true)\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": {{activiesId}},\r\n  \"title\": \"Testando a criação de uma nova activity\",\r\n  \"dueDate\": \"2024-11-30T23:02:10.846Z\",\r\n  \"completed\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/v1/Activities/{{activiesId}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Activities",
+								"{{activiesId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar Atividade",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validar se retorna código de status 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    //Valida se dentro da requisição que fizemos é retornado Status code 200\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/v1/Activities/{{activiesId}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Activities",
+								"{{activiesId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authors",
+			"item": [
+				{
+					"name": "ALL",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validar se o Código do Status é 200\", function () {\r",
+									"    pm.response.to.have.status(200);     //Validará se esta requisição irá me retornar com um status code 200\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar se o Response body contém firstName\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"firstName\");     //Estaremos checando se há a string firstName Dentro do (\"\") \r",
+									"});\r",
+									"\r",
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+									"  \"type\": \"array\",\r",
+									"  \"items\": [\r",
+									"    {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"id\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"idBook\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"firstName\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"lastName\": {\r",
+									"          \"type\": \"string\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"id\",\r",
+									"        \"idBook\",\r",
+									"        \"firstName\",\r",
+									"        \"lastName\"\r",
+									"      ]\r",
+									"    }\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"pm.test('Validar se o contrato é válido', function () {\r",
+									"    /**\r",
+									"     * tv4 -> lib/biblioteca de validar schema\r",
+									"     * validate -> valide\r",
+									"     * (data, schema) -> response, schema (a resposta está sendo retornado conforme contrato/schema)\r",
+									"     * to.be -> será\r",
+									"     * true -> verdadeiro\r",
+									"     */\r",
+									"    pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;  //Aqui valida se a resposta está em formato json e além disso está dentro dos conformes do schema/contrato\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar se o Response Body é do tipo array\", function () {\r",
+									"    /**\r",
+									"     * pm -> postman\r",
+									"     * expect -> espero que\r",
+									"     * (pm.response) -> o response body\r",
+									"     * json() -> esteja em formato json\r",
+									"     * to.be -> e que seja\r",
+									"     * an('array') -> do tipo array de objetos\r",
+									"     */\r",
+									"    pm.expect(pm.response.json()).to.be.an('array')     //Validará se esta requisição irá me retornar com um corpo de resposta do tipo Array de objetos (matriz/vetor)\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/v1/Authors",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Authors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Fixed the type error in the test script for 'Captura de ID'\r",
+									"pm.test(\"Validar se o Código do Status é 200\", function () {\r",
+									"    pm.response.to.have.status(200);     //Validará se esta requisição irá me retornar com um status code 200\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar se o Response body contém firstName\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"firstName\");     //Estaremos checando se há a string firstName Dentro do (\"\")\r",
+									"});\r",
+									"\r",
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"id\": {\r",
+									"      \"type\": \"integer\"\r",
+									"    },\r",
+									"    \"idBook\": {\r",
+									"      \"type\": \"integer\"\r",
+									"    },\r",
+									"    \"firstName\": {\r",
+									"      \"type\": \"string\"\r",
+									"    },\r",
+									"    \"lastName\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"id\",\r",
+									"    \"idBook\",\r",
+									"    \"firstName\",\r",
+									"    \"lastName\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"pm.test('Validar se o contrato é válido', function () {\r",
+									"    /**\r",
+									"     * tv4 -> lib/biblioteca de validar schema\r",
+									"     * validate -> valide\r",
+									"     * (data, schema) -> response, schema (a resposta está sendo retornado conforme contrato/schema)\r",
+									"     * to.be -> será\r",
+									"     * true -> verdadeiro\r",
+									"     */\r",
+									"    pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;  //Aqui valida se a resposta está em formato json e além disso está dentro dos conformes do schema/contrato\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar se o Response Body é do tipo object\", function () {\r",
+									"    /**\r",
+									"     * pm -> postman\r",
+									"     * expect -> espero que\r",
+									"     * (pm.response) -> o response body\r",
+									"     * json() -> esteja em formato json\r",
+									"     * to.be -> e que seja\r",
+									"     * an('object') -> do tipo objeto\r",
+									"     */\r",
+									"    pm.expect(pm.response.json()).to.be.an('object')     //Validará se esta requisição irá me retornar com um corpo de resposta do objecto com vários parâmetros dentro dele\r",
+									"});\r",
+									"\r",
+									"pm.test('Captura de ID', function(){\r",
+									"    var id = pm.response.json();    //A variável id é igual ao response body em JSON, isso significa que o postam vai \"adentrar\" na JSON como se estivesse navegando como a gente\r",
+									"    pm.globals.set(\"authorsId\",id.id);  //Vai setar no Environment uma variável global de nome authorsId de valor igual a id.id, ou seja, igual ao valor do parâmetro id do corpo da resposta em formato JSON\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"packages": {},
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/v1/Authors/{{authorsId}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Authors",
+								"{{authorsId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ID do Livro",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Fixed the type error in the test script for 'Captura de ID'\r",
+									"pm.test(\"Validar se o Código do Status é 200\", function () {\r",
+									"    pm.response.to.have.status(200);     //Validará se esta requisição irá me retornar com um status code 200\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar se o Response body contém firstName\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"firstName\");     //Estaremos checando se há a string firstName Dentro do (\"\")\r",
+									"});\r",
+									"\r",
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+									"  \"type\": \"array\",\r",
+									"  \"properties\": {\r",
+									"    \"id\": {\r",
+									"      \"type\": \"integer\"\r",
+									"    },\r",
+									"    \"idBook\": {\r",
+									"      \"type\": \"integer\"\r",
+									"    },\r",
+									"    \"firstName\": {\r",
+									"      \"type\": \"string\"\r",
+									"    },\r",
+									"    \"lastName\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"id\",\r",
+									"    \"idBook\",\r",
+									"    \"firstName\",\r",
+									"    \"lastName\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"pm.test('Validar se o contrato é válido', function () {\r",
+									"    /**\r",
+									"     * tv4 -> lib/biblioteca de validar schema\r",
+									"     * validate -> valide\r",
+									"     * (data, schema) -> response, schema (a resposta está sendo retornado conforme contrato/schema)\r",
+									"     * to.be -> será\r",
+									"     * true -> verdadeiro\r",
+									"     */\r",
+									"    pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;  //Aqui valida se a resposta está em formato json e além disso está dentro dos conformes do schema/contrato\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar se o Response Body é do tipo array\", function () {\r",
+									"    /**\r",
+									"     * pm -> postman\r",
+									"     * expect -> espero que\r",
+									"     * (pm.response) -> o response body\r",
+									"     * json() -> esteja em formato json\r",
+									"     * to.be -> e que seja\r",
+									"     * an('object') -> do tipo objeto\r",
+									"     */\r",
+									"    pm.expect(pm.response.json()).to.be.an('array')     //Validará se esta requisição irá me retornar com um corpo de resposta em formato de array com objetos, dentre estes objetos os mesmos trazem vários parâmetros dentro dele\r",
+									"});\r",
+									"\r",
+									"pm.test('Captura de ID', function(){\r",
+									"    var id = pm.response.json();    //A variável id é igual ao response body em JSON, isso significa que o postman vai \"adentrar\" na JSON como se estivesse navegando como nós seres humanos\r",
+									"    pm.globals.set(\"BooksId\",id[0].idBook);  //Vai setar no Environment uma variável global de nome BooksId de valor igual a id[0].idBook, ou seja, igual ao valor do parâmetro idBook do índice 0 do corpo da resposta em formato JSON (pois esta requisição trás mais de um objeto)\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/v1/Authors/authors/books/{{BooksId}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Authors",
+								"authors",
+								"books",
+								"{{BooksId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar Autor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validar se retorna código de status 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    //Valida se dentro da requisição que fizemos é retornado Status code 200\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar se retorna um objeto\", function () {\r",
+									"    pm.expect(pm.response.json()).to.be.an('object')\r",
+									"    //Valida se a resposta do Swagger/Servidor API está em formato JSON e de tipo array\r",
+									"});\r",
+									"\r",
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"items\": [\r",
+									"    {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"id\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"title\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"dueDate\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"completed\": {\r",
+									"          \"type\": \"boolean\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"id\",\r",
+									"        \"title\",\r",
+									"        \"dueDate\",\r",
+									"        \"completed\"\r",
+									"      ]\r",
+									"    }\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"pm.test('O contrato é válido', function () {\r",
+									"    /**\r",
+									"     * tv4 -> lib/biblioteca de validar schema\r",
+									"     * validate -> valide\r",
+									"     * (data, schema) -> response, schema (o response está sendo retornado conforme contrato/schema?)\r",
+									"     * to.be -> será\r",
+									"     * true -> verdadeiro\r",
+									"     */\r",
+									"    console.log(pm.response.json())\r",
+									"    pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"pm.test('Validar o id da criação da atividade', function(){\r",
+									"    /**\r",
+									"    * postman -> pm\r",
+									"    * validar -> expect\r",
+									"    * que o meu id -> pm.response.json().id\r",
+									"    * posui -> to.be\r",
+									"    * id igual ao valor ... -> eql()\r",
+									"    */\r",
+									"    pm.expect(pm.response.json().id).to.be.eql(1)  // Realiza a comparação do parâmetro id que a resposta da requsição deu com o parâmetro id que está dentro de um arquivo .csv (pm.iterationData.get)\r",
+									"\r",
+									"    pm.globals.unset(\"authorsId\");    //Nulifica a variável global activiesId de modo que não confunda o usuário com outros testes\r",
+									"    pm.globals.set(\"authorsId\", pm.response.json().id);   //Coloca dentro da variável global activiesId o mesmo valor do parâmetro id da resposta em formato JSON dessa requisição atual\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": {{authorsId}},\r\n  \"idBook\": 10,\r\n  \"firstName\": \"Nemelol\",\r\n  \"lastName\": \"Gadulo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/v1/Authors",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Authors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Autor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validar se retorna código de status 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    //Valida se dentro da requisição que fizemos é retornado Status code 200\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar se retorna um objeto\", function () {\r",
+									"    pm.expect(pm.response.json()).to.be.an('object')\r",
+									"    //Valida se a resposta do Swagger/Servidor API está em formato JSON e de tipo objeto\r",
+									"});\r",
+									"\r",
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"items\": [\r",
+									"    {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"id\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"title\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"dueDate\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"completed\": {\r",
+									"          \"type\": \"boolean\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"id\",\r",
+									"        \"title\",\r",
+									"        \"dueDate\",\r",
+									"        \"completed\"\r",
+									"      ]\r",
+									"    }\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"pm.test('Validar se o contrato é válido', function () {\r",
+									"    /**\r",
+									"     * tv4 -> lib/biblioteca de validar schema\r",
+									"     * validate -> valide\r",
+									"     * (data, schema) -> response, schema (o response está sendo retornado conforme contrato/schema?)\r",
+									"     * to.be -> será\r",
+									"     * true -> verdadeiro\r",
+									"     */\r",
+									"    console.log(pm.response.json())\r",
+									"    pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"/**\r",
+									" * postman -> pm\r",
+									" * validar -> expect\r",
+									" * que o meu id -> pm.response.json().id\r",
+									" * posui -> to.be\r",
+									" * id igual ao valor ... -> eql()\r",
+									" */\r",
+									"\r",
+									"pm.test('Validar se a edição do parâmetro idBook do Autor foi feita', function(){\r",
+									"    pm.expect(pm.response.json().idBook).to.be.eql(5)\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": {{authorsId}},\r\n  \"idBook\": 5,\r\n  \"firstName\": \"Kastoria\",\r\n  \"lastName\": \"Nethors\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/v1/Authors/{{authorsId}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Authors",
+								"{{authorsId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar Autor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validar se retorna código de status 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    //Valida se dentro da requisição que fizemos é retornado Status code 200\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/v1/Authors/{{authorsId}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Authors",
+								"{{authorsId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Books",
+			"item": [
+				{
+					"name": "ALL",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validar se o Código do Status é 200\", function () {\r",
+									"    pm.response.to.have.status(200);     //Validará se esta requisição irá me retornar com um status code 200\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar se o Response body contém title\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"title\");     //Estaremos checando se há a string title Dentro do Response body\r",
+									"});\r",
+									"\r",
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+									"  \"type\": \"array\",\r",
+									"  \"items\": [\r",
+									"    {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"id\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"title\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"description\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pageCount\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"excerpt\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"publishDate\": {\r",
+									"          \"type\": \"string\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"id\",\r",
+									"        \"title\",\r",
+									"        \"description\",\r",
+									"        \"pageCount\",\r",
+									"        \"excerpt\",\r",
+									"        \"publishDate\"\r",
+									"      ]\r",
+									"    }\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"pm.test('Validar se o contrato é válido', function () {\r",
+									"    /**\r",
+									"     * tv4 -> lib/biblioteca de validar schema\r",
+									"     * validate -> valide\r",
+									"     * (data, schema) -> response, schema (a resposta está sendo retornado conforme contrato/schema)\r",
+									"     * to.be -> será\r",
+									"     * true -> verdadeiro\r",
+									"     */\r",
+									"    pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;  //Aqui valida se a resposta está em formato json e além disso está dentro dos conformes do schema/contrato\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar se o Response Body é do tipo array\", function () {\r",
+									"    /**\r",
+									"     * pm -> postman\r",
+									"     * expect -> espero que\r",
+									"     * (pm.response) -> o response body\r",
+									"     * json() -> esteja em formato json\r",
+									"     * to.be -> e que seja\r",
+									"     * an('array') -> do tipo array de objetos\r",
+									"     */\r",
+									"    pm.expect(pm.response.json()).to.be.an('array')     //Validará se esta requisição irá me retornar com um corpo de resposta do tipo Array de objetos (matriz/vetor)\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/v1/Books",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validar se o Código do Status é 200\", function () {\r",
+									"    pm.response.to.have.status(200);     //Validará se esta requisição irá me retornar com um status code 200\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar se o Response body contém title\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"title\");     //Estaremos checando se há a string firstName Dentro do (\"\")\r",
+									"});\r",
+									"\r",
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"items\": [\r",
+									"    {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"id\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"title\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"description\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pageCount\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"excerpt\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"publishDate\": {\r",
+									"          \"type\": \"string\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"id\",\r",
+									"        \"title\",\r",
+									"        \"description\",\r",
+									"        \"pageCount\",\r",
+									"        \"excerpt\",\r",
+									"        \"publishDate\"\r",
+									"      ]\r",
+									"    }\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"pm.test('Validar se o contrato é válido', function () {\r",
+									"    /**\r",
+									"     * tv4 -> lib/biblioteca de validar schema\r",
+									"     * validate -> valide\r",
+									"     * (data, schema) -> response, schema (a resposta está sendo retornado conforme contrato/schema)\r",
+									"     * to.be -> será\r",
+									"     * true -> verdadeiro\r",
+									"     */\r",
+									"    pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;  //Aqui valida se a resposta está em formato json e além disso está dentro dos conformes do schema/contrato\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar se o Response Body é do tipo object\", function () {\r",
+									"    /**\r",
+									"     * pm -> postman\r",
+									"     * expect -> espero que\r",
+									"     * (pm.response) -> o response body\r",
+									"     * json() -> esteja em formato json\r",
+									"     * to.be -> e que seja\r",
+									"     * an('object') -> do tipo objeto\r",
+									"     */\r",
+									"    pm.expect(pm.response.json()).to.be.an('object')     //Validará se esta requisição irá me retornar com um corpo de resposta do objecto com vários parâmetros dentro dele\r",
+									"});\r",
+									"\r",
+									"pm.test('Captura de ID', function(){\r",
+									"    var id = pm.response.json();    //A variável id é igual ao response body em JSON, isso significa que o Postman vai \"adentrar\" na JSON como se estivesse navegando como a gente\r",
+									"    pm.globals.set(\"BooksId\",id.id);  //Vai setar no Environment uma variável global de nome BooksId de valor igual a id.id, ou seja, igual ao valor do parâmetro id do corpo da resposta em formato JSON\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/v1/Books/{{BooksId}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Books",
+								"{{BooksId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar Livro",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validar se retorna código de status 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    //Valida se dentro da requisição que fizemos é retornado Status code 200\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar se retorna um objeto\", function () {\r",
+									"    pm.expect(pm.response.json()).to.be.an('object')\r",
+									"    //Valida se a resposta do Swagger/Servidor API está em formato JSON e de tipo objeto\r",
+									"});\r",
+									"\r",
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"items\": [\r",
+									"    {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"id\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"title\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"description\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pageCount\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"excerpt\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"publishDate\": {\r",
+									"          \"type\": \"string\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"id\",\r",
+									"        \"title\",\r",
+									"        \"description\",\r",
+									"        \"pageCount\",\r",
+									"        \"excerpt\",\r",
+									"        \"publishDate\"\r",
+									"      ]\r",
+									"    }\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"pm.test('O contrato é válido', function () {\r",
+									"    /**\r",
+									"     * tv4 -> lib/biblioteca de validar schema\r",
+									"     * validate -> valide\r",
+									"     * (data, schema) -> response, schema (o response está sendo retornado conforme contrato/schema?)\r",
+									"     * to.be -> será\r",
+									"     * true -> verdadeiro\r",
+									"     */\r",
+									"    console.log(pm.response.json())\r",
+									"    pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"pm.test('Validar o id da criação da atividade', function(){\r",
+									"    /**\r",
+									"    * postman -> pm\r",
+									"    * validar -> expect\r",
+									"    * que o meu id -> pm.response.json().id\r",
+									"    * posui -> to.be\r",
+									"    * id igual ao valor ... -> eql()\r",
+									"    */\r",
+									"    pm.expect(pm.response.json().id).to.be.eql(30)  // Realiza a comparação do parâmetro id que a resposta da requsição deu com o parâmetro id que está dentro do eql que neste caso é 1\r",
+									"\r",
+									"    pm.globals.unset(\"BooksId\");    //Nulifica a variável global BooksId de modo que não confunda o usuário com outros testes\r",
+									"    pm.globals.set(\"BooksId\", pm.response.json().id);   //Coloca dentro da variável global BooksId o mesmo valor do parâmetro id da resposta em formato JSON dessa requisição atual\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 30,\r\n  \"title\": \"Trashcan\",\r\n  \"description\": \"The Mologg\",\r\n  \"pageCount\": 10,\r\n  \"excerpt\": \"Nothing tbh\",\r\n  \"publishDate\": \"2024-12-13T01:48:15.874Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/v1/Books",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Livro",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validar se retorna código de status 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    //Valida se dentro da requisição que fizemos é retornado Status code 200\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar se retorna um objeto\", function () {\r",
+									"    pm.expect(pm.response.json()).to.be.an('object')\r",
+									"    //Valida se a resposta do Swagger/Servidor API está em formato JSON e de tipo objeto\r",
+									"});\r",
+									"\r",
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"items\": [\r",
+									"    {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"id\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"title\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"description\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pageCount\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"excerpt\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"publishDate\": {\r",
+									"          \"type\": \"string\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"id\",\r",
+									"        \"title\",\r",
+									"        \"description\",\r",
+									"        \"pageCount\",\r",
+									"        \"excerpt\",\r",
+									"        \"publishDate\"\r",
+									"      ]\r",
+									"    }\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"pm.test('Validar se o contrato é válido', function () {\r",
+									"    /**\r",
+									"     * tv4 -> lib/biblioteca de validar schema\r",
+									"     * validate -> valide\r",
+									"     * (data, schema) -> response, schema (o response está sendo retornado conforme contrato/schema?)\r",
+									"     * to.be -> será\r",
+									"     * true -> verdadeiro\r",
+									"     */\r",
+									"    console.log(pm.response.json())\r",
+									"    pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"/**\r",
+									" * postman -> pm\r",
+									" * validar -> expect\r",
+									" * que o meu id -> pm.response.json().id\r",
+									" * posui -> to.be\r",
+									" * id igual ao valor ... -> eql()\r",
+									" */\r",
+									"\r",
+									"pm.test('Validar se a edição do parâmetro pageCount do Livro foi feita', function(){\r",
+									"    pm.expect(pm.response.json().pageCount).to.be.eql(30)\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": {{BooksId}},\r\n  \"title\": \"HooverDamn\",\r\n  \"description\": \"Netshoes\",\r\n  \"pageCount\": 30,\r\n  \"excerpt\": \"Alô\",\r\n  \"publishDate\": \"2024-12-13T01:49:40.381Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/v1/Books/{{BooksId}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Books",
+								"{{BooksId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar Livro",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validar se retorna código de status 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    //Valida se dentro da requisição que fizemos é retornado Status code 200\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/v1/Books/{{BooksId}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Books",
+								"{{BooksId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CoverPhotos",
+			"item": [
+				{
+					"name": "ALL",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validar se o Código do Status é 200\", function () {\r",
+									"    pm.response.to.have.status(200);     //Validará se esta requisição irá me retornar com um status code 200\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar se o Response body contém url\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"url\");     //Estaremos checando se há a string url Dentro do Response Body\r",
+									"});\r",
+									"\r",
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+									"  \"type\": \"array\",\r",
+									"  \"items\": [\r",
+									"    {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"id\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"idBook\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"url\": {\r",
+									"          \"type\": \"string\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"id\",\r",
+									"        \"idBook\",\r",
+									"        \"url\"\r",
+									"      ]\r",
+									"    }\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"pm.test('Validar se o contrato é válido', function () {\r",
+									"    /**\r",
+									"     * tv4 -> lib/biblioteca de validar schema\r",
+									"     * validate -> valide\r",
+									"     * (data, schema) -> response, schema (a resposta está sendo retornado conforme contrato/schema)\r",
+									"     * to.be -> será\r",
+									"     * true -> verdadeiro\r",
+									"     */\r",
+									"    pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;  //Aqui valida se a resposta está em formato json e além disso está dentro dos conformes do schema/contrato\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar se o Response Body é do tipo array\", function () {\r",
+									"    /**\r",
+									"     * pm -> postman\r",
+									"     * expect -> espero que\r",
+									"     * (pm.response) -> o response body\r",
+									"     * json() -> esteja em formato json\r",
+									"     * to.be -> e que seja\r",
+									"     * an('array') -> do tipo array de objetos\r",
+									"     */\r",
+									"    pm.expect(pm.response.json()).to.be.an('array')     //Validará se esta requisição irá me retornar com um corpo de resposta do tipo Array de objetos (matriz/vetor)\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/v1/CoverPhotos",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"CoverPhotos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Fixed the type error in the test script for 'Captura de ID'\r",
+									"pm.test(\"Validar se o Código do Status é 200\", function () {\r",
+									"    pm.response.to.have.status(200);     //Validará se esta requisição irá me retornar com um status code 200\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar se o Response body contém url\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"url\");     //Estaremos checando se há a string url Dentro do Response Body\r",
+									"});\r",
+									"\r",
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"items\": [\r",
+									"    {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"id\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"idBook\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"url\": {\r",
+									"          \"type\": \"string\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"id\",\r",
+									"        \"idBook\",\r",
+									"        \"url\"\r",
+									"      ]\r",
+									"    }\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"pm.test('Validar se o contrato é válido', function () {\r",
+									"    /**\r",
+									"     * tv4 -> lib/biblioteca de validar schema\r",
+									"     * validate -> valide\r",
+									"     * (data, schema) -> response, schema (a resposta está sendo retornado conforme contrato/schema)\r",
+									"     * to.be -> será\r",
+									"     * true -> verdadeiro\r",
+									"     */\r",
+									"    pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;  //Aqui valida se a resposta está em formato json e além disso está dentro dos conformes do schema/contrato\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar se o Response Body é do tipo object\", function () {\r",
+									"    /**\r",
+									"     * pm -> postman\r",
+									"     * expect -> espero que\r",
+									"     * (pm.response) -> o response body\r",
+									"     * json() -> esteja em formato json\r",
+									"     * to.be -> e que seja\r",
+									"     * an('object') -> do tipo objeto\r",
+									"     */\r",
+									"    pm.expect(pm.response.json()).to.be.an('object')     //Validará se esta requisição irá me retornar com um corpo de resposta do objecto com vários parâmetros dentro dele\r",
+									"});\r",
+									"\r",
+									"pm.test('Captura de ID', function(){\r",
+									"    var id = pm.response.json();    //A variável id é igual ao response body em JSON, isso significa que o postam vai \"adentrar\" na JSON como se estivesse navegando como a gente\r",
+									"    pm.globals.set(\"CoverPhotosId\",id.id);  //Vai setar no Environment uma variável global de nome CoverPhotosId de valor igual a id.id, ou seja, igual ao valor do parâmetro id do corpo da resposta em formato JSON\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/v1/CoverPhotos/{{CoverPhotosId}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"CoverPhotos",
+								"{{CoverPhotosId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ID da Capa do Livro",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Fixed the type error in the test script for 'Captura de ID'\r",
+									"pm.test(\"Validar se o Código do Status é 200\", function () {\r",
+									"    pm.response.to.have.status(200);     //Validará se esta requisição irá me retornar com um status code 200\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar se o Response body contém url\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"url\");     //Estaremos checando se há a string firstName Dentro do (\"\")\r",
+									"});\r",
+									"\r",
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+									"  \"type\": \"array\",\r",
+									"  \"items\": [\r",
+									"    {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"id\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"idBook\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"url\": {\r",
+									"          \"type\": \"string\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"id\",\r",
+									"        \"idBook\",\r",
+									"        \"url\"\r",
+									"      ]\r",
+									"    }\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"pm.test('Validar se o contrato é válido', function () {\r",
+									"    /**\r",
+									"     * tv4 -> lib/biblioteca de validar schema\r",
+									"     * validate -> valide\r",
+									"     * (data, schema) -> response, schema (a resposta está sendo retornado conforme contrato/schema)\r",
+									"     * to.be -> será\r",
+									"     * true -> verdadeiro\r",
+									"     */\r",
+									"    pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;  //Aqui valida se a resposta está em formato json e além disso está dentro dos conformes do schema/contrato\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar se o Response Body é do tipo objeto\", function () {\r",
+									"    /**\r",
+									"     * pm -> postman\r",
+									"     * expect -> espero que\r",
+									"     * (pm.response) -> o response body\r",
+									"     * json() -> esteja em formato json\r",
+									"     * to.be -> e que seja\r",
+									"     * an('object') -> do tipo objeto\r",
+									"     */\r",
+									"    pm.expect(pm.response.json()).to.be.an('array')     //Validará se esta requisição irá me retornar com um corpo de resposta em formato de array com objetos, dentre estes objetos os mesmos trazem vários parâmetros dentro dele\r",
+									"});\r",
+									"\r",
+									"pm.test('Captura de ID', function(){\r",
+									"    var id = pm.response.json();    //A variável id é igual ao response body em JSON, isso significa que o postman vai \"adentrar\" na JSON como se estivesse navegando como nós seres humanos\r",
+									"    pm.globals.set(\"BooksId\",id[0].idBook);  //Vai setar no Environment uma variável global de nome BooksId de valor igual a id[0].idBook, ou seja, igual ao valor do parâmetro idBook do índice 0 do corpo da resposta em formato JSON (pois esta requisição trás mais de um objeto)\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/v1/CoverPhotos/books/covers/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"CoverPhotos",
+								"books",
+								"covers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar Capas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validar se retorna código de status 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    //Valida se dentro da requisição que fizemos é retornado Status code 200\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar se retorna um objeto\", function () {\r",
+									"    pm.expect(pm.response.json()).to.be.an('object')\r",
+									"    //Valida se a resposta do Swagger/Servidor API está em formato JSON e de tipo array\r",
+									"});\r",
+									"\r",
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"items\": [\r",
+									"    {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"id\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"title\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"dueDate\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"completed\": {\r",
+									"          \"type\": \"boolean\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"id\",\r",
+									"        \"title\",\r",
+									"        \"dueDate\",\r",
+									"        \"completed\"\r",
+									"      ]\r",
+									"    }\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"pm.test('O contrato é válido', function () {\r",
+									"    /**\r",
+									"     * tv4 -> lib/biblioteca de validar schema\r",
+									"     * validate -> valide\r",
+									"     * (data, schema) -> response, schema (o response está sendo retornado conforme contrato/schema?)\r",
+									"     * to.be -> será\r",
+									"     * true -> verdadeiro\r",
+									"     */\r",
+									"    console.log(pm.response.json())\r",
+									"    pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"pm.test('Validar o id da criação da Foto de capa', function(){\r",
+									"    /**\r",
+									"    * postman -> pm\r",
+									"    * validar -> expect\r",
+									"    * que o meu id -> pm.response.json().id\r",
+									"    * posui -> to.be\r",
+									"    * id igual ao valor ... -> eql()\r",
+									"    */\r",
+									"    pm.expect(pm.response.json().id).to.be.eql(20)  // Realiza a comparação do parâmetro id que a resposta da requsição deu com o parâmetro id que está dentro de um arquivo .csv (pm.iterationData.get)\r",
+									"\r",
+									"    pm.globals.unset(\"CoverPhotosId\");    //Nulifica a variável global activiesId de modo que não confunda o usuário com outros testes\r",
+									"    pm.globals.set(\"CoverPhotosId\", pm.response.json().id);   //Coloca dentro da variável global activiesId o mesmo valor do parâmetro id da resposta em formato JSON dessa requisição atual\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": {{CoverPhotosId}},\r\n  \"idBook\": 9,\r\n  \"url\": \"Agronomicas\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/v1/CoverPhotos",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"CoverPhotos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Capa",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validar se retorna código de status 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    //Valida se dentro da requisição que fizemos é retornado Status code 200\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar se retorna um objeto\", function () {\r",
+									"    pm.expect(pm.response.json()).to.be.an('object')\r",
+									"    //Valida se a resposta do Swagger/Servidor API está em formato JSON e de tipo objeto\r",
+									"});\r",
+									"\r",
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"items\": [\r",
+									"    {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"id\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"title\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"dueDate\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"completed\": {\r",
+									"          \"type\": \"boolean\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"id\",\r",
+									"        \"title\",\r",
+									"        \"dueDate\",\r",
+									"        \"completed\"\r",
+									"      ]\r",
+									"    }\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"pm.test('Validar se o contrato é válido', function () {\r",
+									"    /**\r",
+									"     * tv4 -> lib/biblioteca de validar schema\r",
+									"     * validate -> valide\r",
+									"     * (data, schema) -> response, schema (o response está sendo retornado conforme contrato/schema?)\r",
+									"     * to.be -> será\r",
+									"     * true -> verdadeiro\r",
+									"     */\r",
+									"    console.log(pm.response.json())\r",
+									"    pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"/**\r",
+									" * postman -> pm\r",
+									" * validar -> expect\r",
+									" * que o meu id -> pm.response.json().id\r",
+									" * posui -> to.be\r",
+									" * id igual ao valor ... -> eql()\r",
+									" */\r",
+									"\r",
+									"pm.test('Validar se a edição do parâmetro idBook da Capa foi feita', function(){\r",
+									"    pm.expect(pm.response.json().idBook).to.be.eql(55)\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": {{CoverPhotosId}},\r\n  \"idBook\": 55,\r\n  \"url\": \"É o que tá teno\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/v1/CoverPhotos/{{CoverPhotosId}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"CoverPhotos",
+								"{{CoverPhotosId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar Autor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validar se retorna código de status 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    //Valida se dentro da requisição que fizemos é retornado Status code 200\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/v1/CoverPhotos/{{CoverPhotosId}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"CoverPhotos",
+								"{{CoverPhotosId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "ALL",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validar se o Código do Status é 200\", function () {\r",
+									"    pm.response.to.have.status(200);     //Validará se esta requisição irá me retornar com um status code 200\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar se o Response body contém userName\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"userName\");     //Estaremos checando se há a string userName Dentro do Response body\r",
+									"});\r",
+									"\r",
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+									"  \"type\": \"array\",\r",
+									"  \"items\": [\r",
+									"    {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"id\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"userName\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"password\": {\r",
+									"          \"type\": \"string\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"id\",\r",
+									"        \"userName\",\r",
+									"        \"password\"\r",
+									"      ]\r",
+									"    }\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"pm.test('Validar se o contrato é válido', function () {\r",
+									"    /**\r",
+									"     * tv4 -> lib/biblioteca de validar schema\r",
+									"     * validate -> valide\r",
+									"     * (data, schema) -> response, schema (a resposta está sendo retornado conforme contrato/schema)\r",
+									"     * to.be -> será\r",
+									"     * true -> verdadeiro\r",
+									"     */\r",
+									"    pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;  //Aqui valida se a resposta está em formato json e além disso está dentro dos conformes do schema/contrato\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar se o Response Body é do tipo array\", function () {\r",
+									"    /**\r",
+									"     * pm -> postman\r",
+									"     * expect -> espero que\r",
+									"     * (pm.response) -> o response body\r",
+									"     * json() -> esteja em formato json\r",
+									"     * to.be -> e que seja\r",
+									"     * an('array') -> do tipo array de objetos\r",
+									"     */\r",
+									"    pm.expect(pm.response.json()).to.be.an('array')     //Validará se esta requisição irá me retornar com um corpo de resposta do tipo Array de objetos (matriz/vetor)\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/v1/Users",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validar se o Código do Status é 200\", function () {\r",
+									"    pm.response.to.have.status(200);     //Validará se esta requisição irá me retornar com um status code 200\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar se o Response body contém userName\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"userName\");     //Estaremos checando se há a string userName Dentro do Response body\r",
+									"});\r",
+									"\r",
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"items\": [\r",
+									"    {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"id\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"userName\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"password\": {\r",
+									"          \"type\": \"string\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"id\",\r",
+									"        \"userName\",\r",
+									"        \"password\"\r",
+									"      ]\r",
+									"    }\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"pm.test('Validar se o contrato é válido', function () {\r",
+									"    /**\r",
+									"     * tv4 -> lib/biblioteca de validar schema\r",
+									"     * validate -> valide\r",
+									"     * (data, schema) -> response, schema (a resposta está sendo retornado conforme contrato/schema)\r",
+									"     * to.be -> será\r",
+									"     * true -> verdadeiro\r",
+									"     */\r",
+									"    pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;  //Aqui valida se a resposta está em formato json e além disso está dentro dos conformes do schema/contrato\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar se o Response Body é do tipo object\", function () {\r",
+									"    /**\r",
+									"     * pm -> postman\r",
+									"     * expect -> espero que\r",
+									"     * (pm.response) -> o response body\r",
+									"     * json() -> esteja em formato json\r",
+									"     * to.be -> e que seja\r",
+									"     * an('object') -> do tipo objeto\r",
+									"     */\r",
+									"    pm.expect(pm.response.json()).to.be.an('object')     //Validará se esta requisição irá me retornar com um corpo de resposta do objecto com vários parâmetros dentro dele\r",
+									"});\r",
+									"\r",
+									"pm.test('Captura de ID', function(){\r",
+									"    var id = pm.response.json();    //A variável id é igual ao response body em JSON, isso significa que o Postman vai \"adentrar\" na JSON como se estivesse navegando como a gente\r",
+									"    pm.globals.set(\"UsersId\",id.id);  //Vai setar no Environment uma variável global de nome UsersId de valor igual a id.id, ou seja, igual ao valor do parâmetro id do corpo da resposta em formato JSON\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/v1/Users/{{BooksId}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Users",
+								"{{BooksId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar Usuário",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validar se retorna código de status 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    //Valida se dentro da requisição que fizemos é retornado Status code 200\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar se retorna um objeto\", function () {\r",
+									"    pm.expect(pm.response.json()).to.be.an('object')\r",
+									"    //Valida se a resposta do Swagger/Servidor API está em formato JSON e de tipo objeto\r",
+									"});\r",
+									"\r",
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"items\": [\r",
+									"    {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"id\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"userName\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"password\": {\r",
+									"          \"type\": \"string\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"id\",\r",
+									"        \"userName\",\r",
+									"        \"password\"\r",
+									"      ]\r",
+									"    }\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"pm.test('O contrato é válido', function () {\r",
+									"    /**\r",
+									"     * tv4 -> lib/biblioteca de validar schema\r",
+									"     * validate -> valide\r",
+									"     * (data, schema) -> response, schema (o response está sendo retornado conforme contrato/schema?)\r",
+									"     * to.be -> será\r",
+									"     * true -> verdadeiro\r",
+									"     */\r",
+									"    console.log(pm.response.json())\r",
+									"    pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"pm.test('Validar o id da criação do usuário', function(){\r",
+									"    /**\r",
+									"    * postman -> pm\r",
+									"    * validar -> expect\r",
+									"    * que o meu id -> pm.response.json().id\r",
+									"    * posui -> to.be\r",
+									"    * id igual ao valor ... -> eql()\r",
+									"    */\r",
+									"    pm.expect(pm.response.json().id).to.be.eql(10)  // Realiza a comparação do parâmetro id que a resposta da requsição deu com o parâmetro id que está dentro do eql que neste caso é 1\r",
+									"\r",
+									"    pm.globals.unset(\"UsersId\");    //Nulifica a variável global UsersId de modo que não confunda o usuário com outros testes\r",
+									"    pm.globals.set(\"UsersId\", pm.response.json().id);   //Coloca dentro da variável global UsersId o mesmo valor do parâmetro id da resposta em formato JSON dessa requisição atual\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 10,\r\n  \"userName\": \"Thadeus09\",\r\n  \"password\": \"elrond999\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/v1/Users",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Usuário",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validar se retorna código de status 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    //Valida se dentro da requisição que fizemos é retornado Status code 200\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar se retorna um objeto\", function () {\r",
+									"    pm.expect(pm.response.json()).to.be.an('object')\r",
+									"    //Valida se a resposta do Swagger/Servidor API está em formato JSON e de tipo objeto\r",
+									"});\r",
+									"\r",
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"items\": [\r",
+									"    {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"id\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"userName\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"password\": {\r",
+									"          \"type\": \"string\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"id\",\r",
+									"        \"userName\",\r",
+									"        \"password\"\r",
+									"      ]\r",
+									"    }\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"pm.test('Validar se o contrato é válido', function () {\r",
+									"    /**\r",
+									"     * tv4 -> lib/biblioteca de validar schema\r",
+									"     * validate -> valide\r",
+									"     * (data, schema) -> response, schema (o response está sendo retornado conforme contrato/schema?)\r",
+									"     * to.be -> será\r",
+									"     * true -> verdadeiro\r",
+									"     */\r",
+									"    console.log(pm.response.json())\r",
+									"    pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"/**\r",
+									" * postman -> pm\r",
+									" * validar -> expect\r",
+									" * que o meu id -> pm.response.json().id\r",
+									" * posui -> to.be\r",
+									" * id igual ao valor ... -> eql()\r",
+									" */\r",
+									"\r",
+									"pm.test('Validar se a edição do parâmetro userName do Usuário foi feita', function(){\r",
+									"    pm.expect(pm.response.json().userName).to.be.eql(\"Adam West\")\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": {{UsersId}},\r\n  \"userName\": \"Adam West\",\r\n  \"password\": \"mooring12121\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/v1/Users/{{UsersId}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Users",
+								"{{UsersId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar Usuário",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validar se retorna código de status 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    //Valida se dentro da requisição que fizemos é retornado Status code 200\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/v1/Users/{{UsersId}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"Users",
+								"{{UsersId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
